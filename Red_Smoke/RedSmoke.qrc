@@ -1,0 +1,29 @@
+<RCC>
+  <qresource prefix="/img">
+    <file>img/xixihaha.jpg</file>
+    <file>img/help.png</file>
+    <file>img/port_.png</file>
+    <file>img/deal.png</file>
+    <file>img/display.png</file>
+    <file>img/IP.png</file>
+    <file>img/log.png</file>
+    <file>img/man.png</file>
+    <file>img/PASS.png</file>
+    <file>img/path.png</file>
+    <file>img/save.png</file>
+    <file>img/smoke.png</file>
+    <file>img/stop_display.png</file>
+    <file>img/yes.png</file>
+    <file>img/table.png</file>
+    <file>img/port.png</file>
+    <file>img/set.png</file>
+    <file>img/set.jpg</file>
+    <file>img/subWindow.png</file>
+    <file>img/tab.png</file>
+    <file>img/camera.png</file>
+    <file>img/camera_1.png</file>
+    <file>img/camera_2.png</file>
+    <file>img/camera_3.png</file>
+    <file>img/camera_4.png</file>
+  </qresource>
+</RCC>

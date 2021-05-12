@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="a/b">
+    <file>img/xixihaha.jpg</file>
+    <file>img/zju1.jpg</file>
+    <file>img/zju.jpg</file>
+    <file>img/camera.png</file>
+  </qresource>
+  <qresource prefix="新前缀"/>
+</RCC>
