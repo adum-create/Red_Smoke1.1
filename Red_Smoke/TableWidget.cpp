@@ -17,7 +17,7 @@ TableWidget::~TableWidget()
 void TableWidget::initialTable()
 {
 	//设置行和列
-	ui.tableWidget->setRowCount(200);
+	ui.tableWidget->setRowCount(10000);
 	ui.tableWidget->setColumnCount(3);
 
 	//设置表头
