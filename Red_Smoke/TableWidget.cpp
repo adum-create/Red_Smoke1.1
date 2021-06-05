@@ -17,12 +17,14 @@ TableWidget::~TableWidget()
 void TableWidget::initialTable()
 {
 	//设置行和列
-	ui.tableWidget->setRowCount(10000);
-	ui.tableWidget->setColumnCount(3);
+	ui.tableWidget->setRowCount(100000);
+	ui.tableWidget->setColumnCount(4);
 
 	//设置表头
 	QStringList header;
-	header << "时间" <<"报警阈值" << "红烟报警值";
+	header << "时间" <<"报警阈值" << "红烟报警值"<<"备注";
+
+	ui.tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 	ui.tableWidget->setHorizontalHeaderLabels(header);
 }
 
