@@ -24,7 +24,7 @@ void TableWidget::initialTable()
 	QStringList header;
 	header << "时间" <<"报警阈值" << "红烟报警值"<<"备注";
 
-	ui.tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	ui.tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	ui.tableWidget->setHorizontalHeaderLabels(header);
 }
 
