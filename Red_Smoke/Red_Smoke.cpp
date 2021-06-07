@@ -797,6 +797,7 @@ void Red_Smoke::receiveInfo()
 	}
 }
 
+
 /*QString转16进制*/
 void Red_Smoke::convertStringToHex(const QString &str, QByteArray &byteData)
 {
