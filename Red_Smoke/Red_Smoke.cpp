@@ -32,6 +32,8 @@ Red_Smoke::Red_Smoke(QWidget *parent)
 	subwindow_of_help->setWindowTitle(tr("系统简介"));
 	ui->mdiArea->addSubWindow(subwindow_of_help);
 	subwindow_of_help->show();
+	QMdiSubWindow *subwindow_of_init_name = ui->mdiArea->activeSubWindow();
+
 	//四个相机显示界面初始化
 	subwindow_of_video = new VideoWidget();
 	subwindow_of_video->setWindowTitle(tr("预览"));
@@ -39,7 +41,7 @@ Red_Smoke::Red_Smoke(QWidget *parent)
 	initPort();
 	//默认核心窗口为tab模式
 	ui->mdiArea->setViewMode(QMdiArea::TabbedView);
-	ui->mdiArea->setTabsClosable(true); //页面可关闭
+	ui->mdiArea->setTabsClosable(false); //页面可关闭
 	ui->mdiArea->setTabsMovable(true);
 	//设置软件图标
 	this->setWindowIcon(QPixmap(":/img/img/smoke.png"));
@@ -65,7 +67,7 @@ Red_Smoke::Red_Smoke(QWidget *parent)
 	//中心窗口设置tab模式
 	connect(ui->action_tabWindow, &QAction::triggered, [=]() {
 		ui->mdiArea->setViewMode(QMdiArea::TabbedView);
-		ui->mdiArea->setTabsClosable(true); //页面可关闭
+		ui->mdiArea->setTabsClosable(false); //页面可关闭
 		ui->mdiArea->setTabsMovable(true);
 	});
 	//参数设置
@@ -74,8 +76,25 @@ Red_Smoke::Red_Smoke(QWidget *parent)
 	});
 	//历史报警回溯
 	connect(ui->action_warning_table, &QAction::triggered, [=]() {
-		ui->mdiArea->addSubWindow(subwindow_of_table);
-		subwindow_of_table->show();
+
+
+		//测试
+		test = ui->mdiArea->subWindowList();
+		for (int i = 0; i < test.size(); i++)
+		{
+			if (test[i] == subwindow_of_table_name)
+			{
+				ui->mdiArea->setActiveSubWindow(subwindow_of_table_name);
+				open = false;
+			}
+		}
+		if (open)
+		{
+			ui->mdiArea->addSubWindow(subwindow_of_table);
+			subwindow_of_table->show();
+			subwindow_of_table_name = ui->mdiArea->activeSubWindow();
+		}
+		printf("ass");
 	});
 	//串口
 	connect(ui->action_of_serialport_set, &QAction::triggered, [=]() {
@@ -83,8 +102,7 @@ Red_Smoke::Red_Smoke(QWidget *parent)
 	});
 	//帮助
 	connect(ui->action_of_begin, &QAction::triggered, [=]() {
-		//ui->mdiArea->addSubWindow(subwindow_of_help);
-		//subwindow_of_help->show();
+		ui->mdiArea->setActiveSubWindow(test[0]);
 	});
 
 

@@ -27,6 +27,7 @@
 #include<QMenu>
 #include<QMenuBar>
 #include<QToolBar>
+#include<QList>
 #include<QStatusBar>
 #include <QSerialPort>
 #include <QSerialPortInfo>
@@ -136,7 +137,9 @@ private:
 	TableWidget *subwindow_of_table;
 	BeginWidget *subwindow_of_help;
 	VideoWidget *subwindow_of_video;
-
+	QMdiSubWindow *subwindow_of_table_name;
+	QList<QMdiSubWindow*> test;
+	bool open = true;
 	/*串口相关*/
 	QSerialPort* m_serialPort; //串口类
 	QStringList m_portNameList;//串口名
