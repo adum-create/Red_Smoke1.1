@@ -17,7 +17,7 @@ TableWidget::~TableWidget()
 void TableWidget::initialTable()
 {
 	//设置行和列
-	ui.tableWidget->setRowCount(100000);
+	ui.tableWidget->setRowCount(10000);
 	ui.tableWidget->setColumnCount(4);
 
 	//设置表头
@@ -33,4 +33,10 @@ void TableWidget::addData(int rows, int cols, QTableWidgetItem * item)
 {
 	ui.tableWidget->setItem(rows, cols, item);
 	ui.tableWidget->show();
+}
+
+/*清除内容*/
+void TableWidget::clearContent()
+{
+	ui.tableWidget->clearContents();
 }

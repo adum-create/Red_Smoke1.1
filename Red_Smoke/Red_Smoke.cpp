@@ -6,6 +6,10 @@
 析构函数优化
 同时预览4个画面
 其实也没有改什么
+2021.06.10
+解决ui大小适应问题
+添加烟雾图像保存
+.exe图标制作
 */
 
 
@@ -77,7 +81,6 @@ Red_Smoke::Red_Smoke(QWidget *parent)
 	//历史报警回溯
 	connect(ui->action_warning_table, &QAction::triggered, [=]() {
 
-
 		//测试
 		test = ui->mdiArea->subWindowList();
 		for (int i = 0; i < test.size(); i++)
@@ -85,16 +88,15 @@ Red_Smoke::Red_Smoke(QWidget *parent)
 			if (test[i] == subwindow_of_table_name)
 			{
 				ui->mdiArea->setActiveSubWindow(subwindow_of_table_name);
-				open = false;
+				open_table = false;
 			}
 		}
-		if (open)
+		if (open_table)
 		{
 			ui->mdiArea->addSubWindow(subwindow_of_table);
 			subwindow_of_table->show();
 			subwindow_of_table_name = ui->mdiArea->activeSubWindow();
 		}
-		printf("ass");
 	});
 	//串口
 	connect(ui->action_of_serialport_set, &QAction::triggered, [=]() {
@@ -386,7 +388,11 @@ void Red_Smoke::setParameters()
 	threshold_of_warning_record = lineEdit_warning_record.toDouble();
 
 	/*采集图片并处理数据*/
-	collectAndProcessed();
+	if (process)
+	{
+		collectAndProcessed();
+	}
+	process = false;
 }
 
 /*采集图片并处理数据*/
@@ -399,11 +405,26 @@ void Red_Smoke::collectAndProcessed()
 	num_picture = 1;
 	capture_img_deal_data = true;
 
-	/*曲线核心窗口生成*/
-	GraphOfRedValue *subwindow_of_Graph = new GraphOfRedValue();
-	ui->mdiArea->addSubWindow(subwindow_of_Graph);
-	subwindow_of_Graph->show();
-	subwindow_of_Graph->setWindowTitle(tr("曲线"));
+	/*曲线窗口生成*/
+	//检测重复窗口
+	test = ui->mdiArea->subWindowList();
+	for (int i = 0; i < test.size(); i++)
+	{
+		if (test[i] == subwindow_of_curve_name)
+		{
+			ui->mdiArea->setActiveSubWindow(subwindow_of_curve_name);
+			open_curve = false;
+		}
+	}
+	if (open_curve)
+	{
+		subwindow_of_Graph = new GraphOfRedValue();
+		ui->mdiArea->addSubWindow(subwindow_of_Graph);
+		subwindow_of_Graph->show();
+		subwindow_of_Graph->setWindowTitle(tr("曲线"));
+		subwindow_of_curve_name = ui->mdiArea->activeSubWindow();
+	}
+
 	connect(mytimer, &QTimer::timeout, [=]() {
 		if (capture_img_deal_data == true)
 		{
@@ -677,7 +698,8 @@ void Red_Smoke::collectAndProcessed()
 
 			/*更新曲线*/
 			//获取x坐标
-			QString x_label = now_time.toString("hh mm ss");//利用空格将数据分隔开
+			QDateTime time_of_curve = QDateTime::currentDateTime();//获取系统现在的时间
+			QString x_label = time_of_curve.toString("hh mm ss");//利用空格将数据分隔开
 			QStringList x_label_list = x_label.split(" ");
 			QString hour = x_label_list[0];
 			QString min = x_label_list[1];
@@ -687,8 +709,8 @@ void Red_Smoke::collectAndProcessed()
 			double sec_double = sec.toDouble();
 			double x_label_data = hour_double+min_double/60+sec_double/360;
 			
-			//到了半夜12点就清空曲线，否则接着画
-			if (x_label_data == 23.9)
+			//到了半夜11点就清空曲线，否则接着画
+			if (x_label_data >23)
 			{
 				subwindow_of_Graph->clearData();
 			}
@@ -708,6 +730,12 @@ void Red_Smoke::collectAndProcessed()
 				//当前报警值
 				subwindow_of_table->addData(row, 2, new QTableWidgetItem(QString::number(red_value)));
 				row++;
+			}
+			/*大于记录的报表则清除*/
+			if (row >= 10000)
+			{
+				subwindow_of_table->clearContent();
+				row = 0;
 			}
 			
 			/*自动删除图片*/

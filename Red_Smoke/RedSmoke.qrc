@@ -1,6 +1,8 @@
 <RCC>
   <qresource prefix="/img">
+    <file>img/1111.jpg</file>
     <file>img/zju.jpg</file>
+    <file>img/2323.jpg</file>
     <file>img/xixihaha.jpg</file>
     <file>img/help.png</file>
     <file>img/zju1.jpg</file>
@@ -28,4 +30,5 @@
     <file>img/camera_3.png</file>
     <file>img/camera_4.png</file>
   </qresource>
+  <qresource prefix="新前缀"/>
 </RCC>

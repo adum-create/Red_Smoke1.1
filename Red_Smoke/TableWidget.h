@@ -23,6 +23,9 @@ public:
 	/*表格添加数据*/
 	void addData(int rows, int cols, QTableWidgetItem *item);
 
+	/*清除内容*/
+	void clearContent();
+
 private:
 	Ui::TableWidget ui;
 };

@@ -6,4 +6,5 @@
     <file>img/camera.png</file>
   </qresource>
   <qresource prefix="新前缀"/>
+  <qresource prefix="新前缀"/>
 </RCC>

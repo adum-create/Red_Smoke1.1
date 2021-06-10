@@ -137,9 +137,14 @@ private:
 	TableWidget *subwindow_of_table;
 	BeginWidget *subwindow_of_help;
 	VideoWidget *subwindow_of_video;
+	GraphOfRedValue *subwindow_of_Graph;
 	QMdiSubWindow *subwindow_of_table_name;
+	QMdiSubWindow *subwindow_of_curve_name;
 	QList<QMdiSubWindow*> test;
-	bool open = true;
+	bool open_table = true;
+	bool open_curve = true;
+	bool process = true;
+
 	/*串口相关*/
 	QSerialPort* m_serialPort; //串口类
 	QStringList m_portNameList;//串口名
