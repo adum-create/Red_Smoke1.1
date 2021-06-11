@@ -730,7 +730,31 @@ void Red_Smoke::collectAndProcessed()
 			}
 
 			
-			if (Max_Red > threshold_of_warning_record)
+
+			double red_value_tmp = Max_Red;
+
+			red_value = 0;
+
+			//如果检测值等于0，说明图片没有变化就置为0，如果不为0，则将其-100再平方
+			if (red_value_tmp < 100)
+			{
+				red_value = 0;
+			}
+			if (red_value_tmp <= 101 && red_value_tmp >= 100)
+			{
+				red_value = red_value_tmp - 100;
+			}
+			if (red_value_tmp>101)
+			{
+				red_value = (red_value_tmp - 100)*(red_value_tmp - 100);
+			}
+
+			//设置红色值
+			subwindow_of_Graph->setRedValue(red_value);
+			subwindow_of_video->setRedValue(red_value);
+
+			//保存图片
+			if (red_value > threshold_of_warning_record)
 			{
 				if (red_value_camera1 == Max_Red)
 				{
@@ -756,28 +780,6 @@ void Red_Smoke::collectAndProcessed()
 					cv::imwrite(filename_camera4_refer_alarm.toStdString(), img_camera4_refer);
 				}
 			}
-
-			double red_value_tmp = Max_Red;
-
-			red_value = 0;
-
-			//如果检测值等于0，说明图片没有变化就置为0，如果不为0，则将其-100再平方
-			if (red_value_tmp < 100)
-			{
-				red_value = 0;
-			}
-			if (red_value_tmp <= 101 && red_value_tmp >= 100)
-			{
-				red_value = red_value_tmp - 100;
-			}
-			if (red_value_tmp>101)
-			{
-				red_value = (red_value_tmp - 100)*(red_value_tmp - 100);
-			}
-
-			//设置红色值
-			subwindow_of_Graph->setRedValue(red_value);
-			subwindow_of_video->setRedValue(red_value);
 
 			/*更新曲线*/
 			//获取x坐标
