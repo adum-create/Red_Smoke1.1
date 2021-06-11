@@ -2364,7 +2364,7 @@ background-color: rgb(255, 255, 255);</string>
                </font>
               </property>
               <property name="text">
-               <string>差分(ms)</string>
+               <string>差分(ms)：</string>
               </property>
              </widget>
             </item>

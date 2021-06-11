@@ -439,7 +439,6 @@ void Red_Smoke::collectAndProcessed()
 			QString filename_camera1_main = filename;//获取的第一张文件路径
 			QString filename_camera1_refer = filename;//第二张文件路径
 
-
 			//定义相机名(QString)
 			filename_camera1_main.append("/Camera1");
 			filename_camera1_main.append(time);
@@ -450,6 +449,20 @@ void Red_Smoke::collectAndProcessed()
 			filename_camera1_refer.append(time);
 			filename_camera1_refer.append(num);
 			filename_camera1_refer.append("_refer.bmp");
+
+			//保存报警图像路径
+			QString filename_camera1_main_alarm = filename;
+			QString filename_camera1_refer_alarm = filename;
+
+			filename_camera1_main_alarm.append("/Camera1");
+			filename_camera1_main_alarm.append(time);
+			filename_camera1_main_alarm.append("warning");
+			filename_camera1_main_alarm.append("_main.jpg");
+
+			filename_camera1_refer_alarm.append("/Camera1");
+			filename_camera1_refer_alarm.append(time);
+			filename_camera1_refer_alarm.append("warning");
+			filename_camera1_refer_alarm.append("_refer.jpg");
 			//将QString转化为char*
 			QByteArray filename_camera1_main_QByteArray = filename_camera1_main.toLatin1();
 			char* filename_camera1_main_char = filename_camera1_main_QByteArray.data();
@@ -491,6 +504,20 @@ void Red_Smoke::collectAndProcessed()
 			filename_camera2_refer.append(time);
 			filename_camera2_refer.append(num);
 			filename_camera2_refer.append("_refer.bmp");
+
+			//保存报警图像路径
+			QString filename_camera2_main_alarm = filename;
+			QString filename_camera2_refer_alarm = filename;
+
+			filename_camera2_main_alarm.append("/Camera2");
+			filename_camera2_main_alarm.append(time);
+			filename_camera2_main_alarm.append("warning");
+			filename_camera2_main_alarm.append("_main.jpg");
+
+			filename_camera2_refer_alarm.append("/Camera2");
+			filename_camera2_refer_alarm.append(time);
+			filename_camera2_refer_alarm.append("warning");
+			filename_camera2_refer_alarm.append("_refer.jpg");
 			//将QString转化为char*
 			QByteArray filename_camera2_main_QByteArray = filename_camera2_main.toLatin1();
 			char* filename_camera2_main_char = filename_camera2_main_QByteArray.data();
@@ -532,6 +559,20 @@ void Red_Smoke::collectAndProcessed()
 			filename_camera3_refer.append(time);
 			filename_camera3_refer.append(num);
 			filename_camera3_refer.append("_refer.bmp");
+
+			//保存报警图像路径
+			QString filename_camera3_main_alarm = filename;
+			QString filename_camera3_refer_alarm = filename;
+
+			filename_camera3_main_alarm.append("/Camera3");
+			filename_camera3_main_alarm.append(time);
+			filename_camera3_main_alarm.append("warning");
+			filename_camera3_main_alarm.append("_main.jpg");
+
+			filename_camera3_refer_alarm.append("/Camera3");
+			filename_camera3_refer_alarm.append(time);
+			filename_camera3_refer_alarm.append("warning");
+			filename_camera3_refer_alarm.append("_refer.jpg");
 			//将QString转化为char*
 			QByteArray filename_camera3_main_QByteArray = filename_camera3_main.toLatin1();
 			char* filename_camera3_main_char = filename_camera3_main_QByteArray.data();
@@ -573,6 +614,20 @@ void Red_Smoke::collectAndProcessed()
 			filename_camera4_refer.append(time);
 			filename_camera4_refer.append(num);
 			filename_camera4_refer.append("_refer.bmp");
+
+			//保存报警图像路径
+			QString filename_camera4_main_alarm = filename;
+			QString filename_camera4_refer_alarm = filename;
+
+			filename_camera4_main_alarm.append("/Camera4");
+			filename_camera4_main_alarm.append(time);
+			filename_camera4_main_alarm.append("warning");
+			filename_camera4_main_alarm.append("_main.jpg");
+
+			filename_camera4_refer_alarm.append("/Camera4");
+			filename_camera4_refer_alarm.append(time);
+			filename_camera4_refer_alarm.append("warning");
+			filename_camera4_refer_alarm.append("_refer.jpg");
 			//将QString转化为char*
 			QByteArray filename_camera4_main_QByteArray = filename_camera4_main.toLatin1();
 			char* filename_camera4_main_char = filename_camera4_main_QByteArray.data();
@@ -672,6 +727,34 @@ void Red_Smoke::collectAndProcessed()
 			if (red_value_camera4>Max_Red)
 			{
 				Max_Red = red_value_camera4;
+			}
+
+			
+			if (Max_Red > threshold_of_warning_record)
+			{
+				if (red_value_camera1 == Max_Red)
+				{
+					cv::imwrite(filename_camera1_main_alarm.toStdString(), img_camera1_main);
+					cv::imwrite(filename_camera1_refer_alarm.toStdString(), img_camera1_refer);
+				}
+
+				if (red_value_camera2 == Max_Red)
+				{
+					cv::imwrite(filename_camera2_main_alarm.toStdString(), img_camera2_main);
+					cv::imwrite(filename_camera2_refer_alarm.toStdString(), img_camera2_refer);
+				}
+
+				if (red_value_camera3 == Max_Red)
+				{
+					cv::imwrite(filename_camera3_main_alarm.toStdString(), img_camera3_main);
+					cv::imwrite(filename_camera3_refer_alarm.toStdString(), img_camera3_refer);
+				}
+
+				if (red_value_camera4 == Max_Red)
+				{
+					cv::imwrite(filename_camera4_main_alarm.toStdString(), img_camera4_main);
+					cv::imwrite(filename_camera4_refer_alarm.toStdString(), img_camera4_refer);
+				}
 			}
 
 			double red_value_tmp = Max_Red;
