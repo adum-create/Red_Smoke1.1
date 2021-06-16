@@ -2934,7 +2934,7 @@ background-color: rgb(255, 255, 255);</string>
              <widget class="QWidget" name="widget_11" native="true">
               <layout class="QHBoxLayout" name="horizontalLayout_58">
                <item>
-                <widget class="QPushButton" name="pushButton_send">
+                <widget class="QPushButton" name="pushButton_begin_debug">
                  <property name="font">
                   <font>
                    <family>黑体</family>
@@ -2947,7 +2947,7 @@ background-color: rgb(255, 255, 255);</string>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_send_stop">
+                <widget class="QPushButton" name="pushButton_stop_debug">
                  <property name="font">
                   <font>
                    <family>黑体</family>

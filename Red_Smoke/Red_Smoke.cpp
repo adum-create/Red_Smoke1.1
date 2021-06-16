@@ -23,6 +23,7 @@ Red_Smoke::Red_Smoke(QWidget *parent)
 	camera_2 = new Camera();
 	camera_3 = new Camera();
 	camera_4 = new Camera();
+	debug = false;
 
 	/*界面初始化*/
 	ui = new Ui::Red_SmokeClass();
@@ -171,6 +172,13 @@ Red_Smoke::Red_Smoke(QWidget *parent)
 	connect(ui->pushButton_ensure_parameters, &QPushButton::clicked, this, &Red_Smoke::setParameters);
 	//connect(ui->pushButton_ensure_parameters, &QPushButton::clicked, this, &Red_Smoke::collectAndProcessed);
 
+	/*调试*/
+	connect(ui->pushButton_begin_debug, &QPushButton::clicked, [=]() {
+		debug = true;
+	});
+	connect(ui->pushButton_stop_debug, &QPushButton::clicked, [=]() {
+		debug = false;
+	});
 
 	/*实验数据处理*/
 	////第一次图像显示测试
@@ -451,8 +459,10 @@ void Red_Smoke::collectAndProcessed()
 			filename_camera1_refer.append("_refer.bmp");
 
 			//保存报警图像路径
-			QString filename_camera1_main_alarm = filename;
-			QString filename_camera1_refer_alarm = filename;
+			QString filename_camera1_main_alarm;
+			QString filename_camera1_refer_alarm;
+			filename_camera1_main_alarm.append("C:/Warning_Record");
+			filename_camera1_refer_alarm.append("C:/Warning_Record");
 
 			filename_camera1_main_alarm.append("/Camera1");
 			filename_camera1_main_alarm.append(time);
@@ -463,6 +473,15 @@ void Red_Smoke::collectAndProcessed()
 			filename_camera1_refer_alarm.append(time);
 			filename_camera1_refer_alarm.append("warning");
 			filename_camera1_refer_alarm.append("_refer.jpg");
+
+			//保存烟雾图像路径
+			QString filename_camera1_smoke;
+			filename_camera1_smoke.append("C:/Debug");
+			filename_camera1_smoke.append("/Camera1");
+			filename_camera1_smoke.append(time);
+			filename_camera1_smoke.append(num);
+			filename_camera1_smoke.append(".jpg");
+
 			//将QString转化为char*
 			QByteArray filename_camera1_main_QByteArray = filename_camera1_main.toLatin1();
 			char* filename_camera1_main_char = filename_camera1_main_QByteArray.data();
@@ -506,8 +525,10 @@ void Red_Smoke::collectAndProcessed()
 			filename_camera2_refer.append("_refer.bmp");
 
 			//保存报警图像路径
-			QString filename_camera2_main_alarm = filename;
-			QString filename_camera2_refer_alarm = filename;
+			QString filename_camera2_main_alarm;
+			QString filename_camera2_refer_alarm;
+			filename_camera2_main_alarm.append("C:/Warning_Record");
+			filename_camera2_refer_alarm.append("C:/Warning_Record");
 
 			filename_camera2_main_alarm.append("/Camera2");
 			filename_camera2_main_alarm.append(time);
@@ -518,6 +539,14 @@ void Red_Smoke::collectAndProcessed()
 			filename_camera2_refer_alarm.append(time);
 			filename_camera2_refer_alarm.append("warning");
 			filename_camera2_refer_alarm.append("_refer.jpg");
+
+			//保存烟雾图像路径
+			QString filename_camera2_smoke;
+			filename_camera2_smoke.append("C:/Debug");
+			filename_camera2_smoke.append("/Camera2");
+			filename_camera2_smoke.append(time);
+			filename_camera2_smoke.append(num);
+			filename_camera2_smoke.append(".jpg");
 			//将QString转化为char*
 			QByteArray filename_camera2_main_QByteArray = filename_camera2_main.toLatin1();
 			char* filename_camera2_main_char = filename_camera2_main_QByteArray.data();
@@ -561,8 +590,10 @@ void Red_Smoke::collectAndProcessed()
 			filename_camera3_refer.append("_refer.bmp");
 
 			//保存报警图像路径
-			QString filename_camera3_main_alarm = filename;
-			QString filename_camera3_refer_alarm = filename;
+			QString filename_camera3_main_alarm;
+			QString filename_camera3_refer_alarm;
+			filename_camera3_main_alarm.append("C:/Warning_Record");
+			filename_camera3_refer_alarm.append("C:/Warning_Record");
 
 			filename_camera3_main_alarm.append("/Camera3");
 			filename_camera3_main_alarm.append(time);
@@ -573,6 +604,15 @@ void Red_Smoke::collectAndProcessed()
 			filename_camera3_refer_alarm.append(time);
 			filename_camera3_refer_alarm.append("warning");
 			filename_camera3_refer_alarm.append("_refer.jpg");
+
+			//保存烟雾图像路径
+			QString filename_camera3_smoke;
+			filename_camera3_smoke.append("C:/Debug");
+			filename_camera3_smoke.append("/Camera3");
+			filename_camera3_smoke.append(time);
+			filename_camera3_smoke.append(num);
+			filename_camera3_smoke.append(".jpg");
+
 			//将QString转化为char*
 			QByteArray filename_camera3_main_QByteArray = filename_camera3_main.toLatin1();
 			char* filename_camera3_main_char = filename_camera3_main_QByteArray.data();
@@ -616,8 +656,10 @@ void Red_Smoke::collectAndProcessed()
 			filename_camera4_refer.append("_refer.bmp");
 
 			//保存报警图像路径
-			QString filename_camera4_main_alarm = filename;
-			QString filename_camera4_refer_alarm = filename;
+			QString filename_camera4_main_alarm;
+			QString filename_camera4_refer_alarm;
+			filename_camera4_main_alarm.append("C:/Warning_Record");
+			filename_camera4_refer_alarm.append("C:/Warning_Record");
 
 			filename_camera4_main_alarm.append("/Camera4");
 			filename_camera4_main_alarm.append(time);
@@ -665,6 +707,12 @@ void Red_Smoke::collectAndProcessed()
 			cv::Mat img_camera3_refer = cv::imread(filename_camera3_refer.toStdString());
 			cv::Mat img_camera4_main = cv::imread(filename_camera4_main.toStdString());
 			cv::Mat img_camera4_refer = cv::imread(filename_camera4_refer.toStdString());
+
+			//四个烟雾图像
+			cv::Mat img_smoke_camera1;
+			cv::Mat img_smoke_camera2;
+			cv::Mat img_smoke_camera3;
+			cv::Mat img_smoke_camera4;
 
 			//检测采集相机有效个数
 			int effect_camera_num = 0;
@@ -753,7 +801,7 @@ void Red_Smoke::collectAndProcessed()
 			subwindow_of_Graph->setRedValue(red_value);
 			subwindow_of_video->setRedValue(red_value);
 
-			//保存图片
+			//保存红烟图片
 			if (red_value > threshold_of_warning_record)
 			{
 				if (red_value_camera1 == Max_Red)
@@ -781,6 +829,21 @@ void Red_Smoke::collectAndProcessed()
 				}
 			}
 
+			//如果处于调试状态就保存烟雾图片
+			if (debug)
+			{
+				img_smoke_camera1 = SmokeRecongnize::smokeImg(img_camera1_main, img_camera1_refer, threshold1, threshold2, a);
+				img_smoke_camera2 = SmokeRecongnize::smokeImg(img_camera2_main, img_camera2_refer, threshold1, threshold2, a);
+				img_smoke_camera3 = SmokeRecongnize::smokeImg(img_camera3_main, img_camera3_refer, threshold1, threshold2, a);
+
+				cv::imwrite(filename_camera1_smoke.toStdString(), img_smoke_camera1);
+				cv::imwrite(filename_camera2_smoke.toStdString(), img_smoke_camera2);
+				cv::imwrite(filename_camera3_smoke.toStdString(), img_smoke_camera3);
+			}
+			else
+			{
+
+			}
 			/*更新曲线*/
 			//获取x坐标
 			QDateTime time_of_curve = QDateTime::currentDateTime();//获取系统现在的时间

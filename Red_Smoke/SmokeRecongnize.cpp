@@ -203,6 +203,63 @@ double SmokeRecongnize::recognizeAnalyze(Mat first_img, Mat second_img, double t
 	return red_test1;
 }
 
+/*调试保存烟雾图片*/
+Mat SmokeRecongnize::smokeImg(Mat first_img, Mat second_img, double threshold1, int threshold2, double a)
+{
+	Mat roiImg_test0;
+	 //先检测两张图片是否一致再判断相对值
+	bool isequal = matIsEqual(first_img, second_img);
+	if (isequal == true)
+	{
+		return roiImg_test0;
+	}
+
+	else
+	{
+		//定义坐标
+		vector<int> coordinate_test1(4);
+		//计算差分
+		Mat sub_test1(1080, 1920, CV_64FC1);
+		sub_test1 = subImg(first_img, second_img, threshold1);
+		//过滤
+		filter(sub_test1, 9, 16, threshold2);
+		//当没有检测到边缘变化时就自动为0
+		int num = 0;
+		for (int i = 0; i < 1080; i++)
+		{
+			for (int j = 0; j < 1920; j++)
+
+			{
+
+				if (sub_test1.at<float>(i, j)>0)
+				{
+					num++;
+				}
+				else
+				{
+
+				}
+			}
+		}
+		if (num>2)//num代表检测出来的区域大小
+		{
+			//获取坐标系
+			coordinate_test1 = setCoordinate(sub_test1);
+			//提取烟雾区域
+			Mat roiImg_test1((coordinate_test1[3] - coordinate_test1[2]), (coordinate_test1[1] - coordinate_test1[0]), CV_8UC3);
+			roiImg_test1 = regionExtraction(first_img, coordinate_test1[0], coordinate_test1[2], (coordinate_test1[1] - coordinate_test1[0]), (coordinate_test1[3] - coordinate_test1[2]));
+			return roiImg_test1;
+		}
+		else
+		{
+			return roiImg_test0;
+		}
+
+
+	}
+
+}
+
 /*判断两个图像是否一致*/
 bool SmokeRecongnize::matIsEqual(const cv::Mat mat1, const cv::Mat mat2)
 {

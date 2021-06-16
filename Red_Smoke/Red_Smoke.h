@@ -119,6 +119,7 @@ private:
 	int dif_time;       //连续采样时间
 	int max_img_amount; //最大图片存在数量
 	double threshold_of_warning_record;  //报警记录阈值
+	bool debug;
 
 	/*报警记录表格参数*/
 	int row = 0;

@@ -37,6 +37,8 @@ public:
 	//水池红色计算
 	static double poolAnalyze(Mat first_img);
 
+	//调试保存烟雾图片
+	static Mat  smokeImg(Mat first_img, Mat second_img, double threshold1, int threshold2, double a);
 
 
 };
