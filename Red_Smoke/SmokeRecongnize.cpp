@@ -27,6 +27,17 @@ Mat SmokeRecongnize::subImg(Mat img_before, Mat img_after, double threshold)
 	//    cv::imwrite("img_before_gray.bmp", img_before_gray);
 	//    cv::imwrite("img_after_gray.bmp", img_after_gray);
 
+	//将图片的下面五分之一设为0
+	for (int rows = 864; rows < 1080; rows++)
+	{
+		for (int cols = 0; cols < 1920; cols++)
+		{
+			img_before_gray.at<double>(rows, cols) = 0;
+			img_after_gray.at<double>(rows, cols) = 0;
+		}
+	}
+
+
 	for (int rows = 0; rows < 1080; rows++)
 	{
 		for (int cols = 0; cols < 1920; cols++)
