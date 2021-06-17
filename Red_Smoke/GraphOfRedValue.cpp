@@ -66,7 +66,7 @@ void GraphOfRedValue::clearData()
 void GraphOfRedValue::renew()
 {
 	double x = QDateTime::currentSecsSinceEpoch();
-	ui.widget_of_plot->xAxis->setRange(x, x+604800);//实时调整X轴的显示范围
+	ui.widget_of_plot->xAxis->setRange(x, x+1800);//实时调整X轴的显示范围
 	//移动和放大缩小功能
 	ui.widget_of_plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
 }
