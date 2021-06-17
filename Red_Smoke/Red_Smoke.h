@@ -133,6 +133,7 @@ private:
 
 	/*计时器*/
 	QTimer *mytimer;
+	int day;
 
 	/*报警记录表格，帮助界面，四台相机显示界面*/
 	TableWidget *subwindow_of_table;

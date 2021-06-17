@@ -221,7 +221,7 @@ background-color: rgb(0, 0, 127);</string>
 background-color: rgb(255, 255, 255);</string>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>5</number>
        </property>
        <widget class="QWidget" name="page_camera1">
         <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -252,7 +252,7 @@ background-color: rgb(255, 255, 255);</string>
                </font>
               </property>
               <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;台州三期烟囱西北&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;台州二期烟囱西&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -742,7 +742,7 @@ background-color: rgb(255, 255, 255);</string>
                </font>
               </property>
               <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;台州三期烟囱东南&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;台州二期烟囱西北&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -1232,7 +1232,7 @@ background-color: rgb(255, 255, 255);</string>
                </font>
               </property>
               <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;台州三期烟囱西南&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;台州二期烟囱北&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -2923,7 +2923,7 @@ background-color: rgb(255, 255, 255);</string>
                <item>
                 <widget class="QLabel" name="label_send_message">
                  <property name="text">
-                  <string>TextLabel</string>
+                  <string>无信号</string>
                  </property>
                 </widget>
                </item>
@@ -3020,7 +3020,7 @@ background-color: rgb(255, 255, 255);</string>
      <normaloff>:/img/img/camera_1.png</normaloff>:/img/img/camera_1.png</iconset>
    </property>
    <property name="text">
-    <string>台州三期烟囱西北</string>
+    <string>台州二期烟囱西</string>
    </property>
    <property name="toolTip">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;1号相机&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -3057,7 +3057,7 @@ background-color: rgb(255, 255, 255);</string>
      <normaloff>:/img/img/camera_2.png</normaloff>:/img/img/camera_2.png</iconset>
    </property>
    <property name="text">
-    <string>台州三期烟囱东南</string>
+    <string>台州二期烟囱西北</string>
    </property>
   </action>
   <action name="action_of_set_parameters">
@@ -3093,7 +3093,7 @@ background-color: rgb(255, 255, 255);</string>
      <normaloff>:/img/img/camera_3.png</normaloff>:/img/img/camera_3.png</iconset>
    </property>
    <property name="text">
-    <string>台州三期烟囱西南</string>
+    <string>台州二期烟囱北</string>
    </property>
   </action>
   <action name="action_manage_of_camera4">

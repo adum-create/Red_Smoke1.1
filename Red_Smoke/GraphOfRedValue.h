@@ -22,6 +22,8 @@ public:
 	void rePaint(double x, double y);
 	/*清除曲线数据，保留设置*/
 	void clearData();
+	/*更新坐标轴*/
+	void renew();
 
 private:
 	Ui::GraphOfRedValue ui;

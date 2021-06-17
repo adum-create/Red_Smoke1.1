@@ -24,6 +24,7 @@ Red_Smoke::Red_Smoke(QWidget *parent)
 	camera_3 = new Camera();
 	camera_4 = new Camera();
 	debug = false;
+	day = 1;
 
 	/*界面初始化*/
 	ui = new Ui::Red_SmokeClass();
@@ -432,7 +433,7 @@ void Red_Smoke::collectAndProcessed()
 		subwindow_of_Graph->setWindowTitle(tr("曲线"));
 		subwindow_of_curve_name = ui->mdiArea->activeSubWindow();
 	}
-
+	subwindow_of_Graph->renew();
 	connect(mytimer, &QTimer::timeout, [=]() {
 		if (capture_img_deal_data == true)
 		{
@@ -845,28 +846,23 @@ void Red_Smoke::collectAndProcessed()
 
 			}
 			/*更新曲线*/
-			//获取x坐标
-			QDateTime time_of_curve = QDateTime::currentDateTime();//获取系统现在的时间
-			QString x_label = time_of_curve.toString("hh mm ss");//利用空格将数据分隔开
-			QStringList x_label_list = x_label.split(" ");
-			QString hour = x_label_list[0];
-			QString min = x_label_list[1];
-			QString sec = x_label_list[2];
-			double hour_double = hour.toDouble();
-			double min_double = min.toDouble();
-			double sec_double = sec.toDouble();
-			double x_label_data = hour_double+min_double/60+sec_double/360;
 			
-			//到了半夜11点就清空曲线，否则接着画
-			if (x_label_data >23)
+			//到了15号自动清空
+			QDateTime time_of_now = QDateTime::currentDateTime();//获取系统现在的时间
+			QString x_label = time_of_now.toString("yy MM dd hh mm ss");//利用空格将数据分隔开
+			QStringList x_label_list = x_label.split(" ");
+			QString day = x_label_list[2];
+			int days = day.toInt();
+			if (days == 15)
 			{
 				subwindow_of_Graph->clearData();
 			}
-			else
-			{
-				//画点
-				subwindow_of_Graph->rePaint(x_label_data, red_value);
-			}
+
+			//画点
+			double x_label_data = QDateTime::currentSecsSinceEpoch();
+			subwindow_of_Graph->rePaint(x_label_data, red_value);
+		
+			
 
 			/*当大于报警记录阈值时，就保存在表格中*/
 			if (red_value > threshold_of_warning_record)
