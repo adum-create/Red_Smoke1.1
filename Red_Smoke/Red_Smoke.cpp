@@ -789,13 +789,22 @@ void Red_Smoke::collectAndProcessed()
 			{
 				red_value = 0;
 			}
-			if (red_value_tmp <= 101 && red_value_tmp >= 100)
+			if (red_value_tmp <= 100.3 && red_value_tmp >= 100)
 			{
-				red_value = red_value_tmp - 100;
+				red_value = red_value_tmp - 100 + 5;
+			}
+			if (red_value_tmp <= 100.5 && red_value_tmp >= 100.3)
+			{
+				red_value = red_value_tmp - 100 + 10;
+			}
+
+			if (red_value_tmp <= 101 && red_value_tmp >= 100.5)
+			{
+				red_value = red_value_tmp - 100 + 20;
 			}
 			if (red_value_tmp>101)
 			{
-				red_value = (red_value_tmp - 100)*(red_value_tmp - 100);
+				red_value = (red_value_tmp - 100)*(red_value_tmp - 100) + 20;
 			}
 
 			//设置红色值
